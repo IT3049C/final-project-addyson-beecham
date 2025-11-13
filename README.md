@@ -1,4 +1,5 @@
-# GameHub
+# GameHub: Solo Final Project by Addyson Beecham
+
 
 ## Checklist
 
