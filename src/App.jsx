@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import LandingPage from "./hub/LandingPage";
 import "./App.css";
 
-// Games
 import RockPaperScissors from "./games/RockPaperScissors/RPS";
 import TicTacToe from "./games/TicTacToe/TicTacToe";
 import Wordle from "./games/Wordle/Wordle";
