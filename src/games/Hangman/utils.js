@@ -1,28 +1,13 @@
-const WORDS = [
-  "react",
-  "javascript",
-  "programming",
-  "hangman",
-  "computer",
-  "developer",
-  "coding",
-  "algorithm",
-  "database",
-  "function",
-  "variable",
-  "constant",
-  "framework",
-  "library",
-  "project",
-  "website",
-  "application",
-  "software",
-  "hardware",
-  "network",
-];
-
-export function getRandomWord() {
-  return WORDS[Math.floor(Math.random() * WORDS.length)];
+export async function getRandomWord() {
+  try {
+    const resp = await fetch(`https://it3049c-hangman.fly.dev/api/random-word`);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data.word) return data.word.toLowerCase();
+    }
+  } catch (e) {
+  }
+  return "hangman";
 }
 
 export function getDisplayWord(targetWord, guessedLetters) {
