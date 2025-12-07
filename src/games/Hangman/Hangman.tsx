@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import "./Hangman.css";
 import { getDisplayWord, isGameWon, isGameLost, resetGame, getRandomWord } from "./utils";
@@ -6,10 +6,21 @@ import { getDisplayWord, isGameWon, isGameLost, resetGame, getRandomWord } from 
 export default function Hangman() {
   const { playerName } = useContext(PlayerContext);
   const urlSeed = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('seed') : null;
-  const [targetWord, setTargetWord] = useState<string>(urlSeed || getRandomWord());
+  const [targetWord, setTargetWord] = useState<string>(urlSeed || "");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [wrongGuesses, setWrongGuesses] = useState<number>(0);
   const maxWrong = 6;
+
+  useEffect(() => {
+    if (!targetWord && !urlSeed) {
+      (async () => {
+        const w = await getRandomWord();
+        setTargetWord(w);
+      })();
+    } else if (urlSeed && !targetWord) {
+      setTargetWord(urlSeed);
+    }
+  }, []);
 
   const handleGuess = (letter: string) => {
     if (guessedLetters.includes(letter)) return;
@@ -21,11 +32,15 @@ export default function Hangman() {
     }
   };
 
-  const handleReset = () => {
-    const { guessedLetters, wrongGuesses, targetWord: newWord } = resetGame();
-    setGuessedLetters(guessedLetters);
-    setWrongGuesses(wrongGuesses);
-    setTargetWord(urlSeed || newWord);
+  const handleReset = async () => {
+    setGuessedLetters([]);
+    setWrongGuesses(0);
+    if (urlSeed) {
+      setTargetWord(urlSeed);
+    } else {
+      const w = await getRandomWord();
+      setTargetWord(w);
+    }
   };
 
   const displayWord = getDisplayWord(targetWord, guessedLetters);
