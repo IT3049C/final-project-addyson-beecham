@@ -5,14 +5,24 @@ import "./wordle.css";
 
 export default function Wordle() {
   const { playerName } = useContext(PlayerContext);
-  const [targetWord, setTargetWord] = useState(() => getRandomWord());
+  const [targetWord, setTargetWord] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState("");
   const [result, setResult] = useState("");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    let mounted = true;
+    async function init() {
+      const w = await getRandomWord();
+      if (mounted) setTargetWord(w);
+    }
+    init();
+    return () => { mounted = false };
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isValidGuess(currentGuess)) return;
+    if (!await isValidGuess(currentGuess)) return;
 
     const feedback = getFeedback(currentGuess, targetWord);
     const newGuesses = [...guesses, { word: currentGuess, feedback }];
@@ -27,12 +37,13 @@ export default function Wordle() {
     setCurrentGuess("");
   };
 
-  const handleReset = () => {
+  const handleReset = async () => {
     const { guesses, result, currentGuess } = resetGame();
     setGuesses(guesses);
     setResult(result);
     setCurrentGuess(currentGuess);
-    setTargetWord(getRandomWord());
+    const w = await getRandomWord();
+    setTargetWord(w);
   };
 
   useEffect(() => {
@@ -42,19 +53,21 @@ export default function Wordle() {
       const key = e.key;
 
       if (key === "Enter") {
-        if (isValidGuess(currentGuess) && guesses.length < 6) {
-          const feedback = getFeedback(currentGuess, targetWord);
-          const newGuesses = [...guesses, { word: currentGuess, feedback }];
-          setGuesses(newGuesses);
+        (async () => {
+          if (await isValidGuess(currentGuess) && guesses.length < 6) {
+            const feedback = getFeedback(currentGuess, targetWord);
+            const newGuesses = [...guesses, { word: currentGuess, feedback }];
+            setGuesses(newGuesses);
 
-          if (isCorrectGuess(currentGuess, targetWord)) {
-            setResult(`${playerName || "You"} guessed correctly!`);
-          } else if (newGuesses.length >= 6) {
-            setResult(`Game over! The word was ${targetWord}.`);
+            if (isCorrectGuess(currentGuess, targetWord)) {
+              setResult(`${playerName || "You"} guessed correctly!`);
+            } else if (newGuesses.length >= 6) {
+              setResult(`Game over! The word was ${targetWord}.`);
+            }
+
+            setCurrentGuess("");
           }
-
-          setCurrentGuess("");
-        }
+        })();
         return;
       }
 
