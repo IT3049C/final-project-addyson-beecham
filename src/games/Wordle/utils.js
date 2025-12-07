@@ -1,31 +1,26 @@
-export function isValidGuess(guess) {
-  return typeof guess === "string" && guess.length === 5;
+export async function isValidGuess(guess) {
+  if (typeof guess !== "string" || guess.length !== 5) return false;
+
+  try {
+    const res = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(guess)}`
+    );
+    return res.ok;
+  } catch (e) {
+    return false;
+  }
 }
 
-export const WORDS = [
-  "react",
-  "apple",
-  "angle",
-  "brace",
-  "crane",
-  "delta",
-  "frame",
-  "grace",
-  "hotel",
-  "input",
-  "joker",
-  "karma",
-  "lemon",
-  "mango",
-  "north",
-  "ocean",
-  "pride",
-  "query",
-  "river",
-  "shine",
-];
+export async function getRandomWord() {
+  try {
+    const resp = await fetch(`https://random-word-api.herokuapp.com/word?length=5`);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (Array.isArray(data) && data.length > 0) return data[0].toLowerCase();
+    }
+  } catch (e) {
+  }
 
-export function getRandomWord() {
   return WORDS[Math.floor(Math.random() * WORDS.length)];
 }
 
