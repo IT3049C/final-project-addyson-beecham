@@ -1,4 +1,30 @@
-// Show word with underscores for unguessed letters
+const WORDS = [
+  "react",
+  "javascript",
+  "programming",
+  "hangman",
+  "computer",
+  "developer",
+  "coding",
+  "algorithm",
+  "database",
+  "function",
+  "variable",
+  "constant",
+  "framework",
+  "library",
+  "project",
+  "website",
+  "application",
+  "software",
+  "hardware",
+  "network",
+];
+
+export function getRandomWord() {
+  return WORDS[Math.floor(Math.random() * WORDS.length)];
+}
+
 export function getDisplayWord(targetWord, guessedLetters) {
   return targetWord
     .split("")
@@ -6,20 +32,18 @@ export function getDisplayWord(targetWord, guessedLetters) {
     .join(" ");
 }
 
-// Check if player has won
 export function isGameWon(displayWord, targetWord) {
   return displayWord.replace(/\s/g, "") === targetWord;
 }
 
-// Check if player has lost
 export function isGameLost(wrongGuesses, maxWrong) {
   return wrongGuesses >= maxWrong;
 }
 
-// Reset game state
 export function resetGame() {
   return {
     guessedLetters: [],
     wrongGuesses: 0,
+    targetWord: getRandomWord(),
   };
 }
