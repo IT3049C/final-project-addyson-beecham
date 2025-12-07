@@ -1,0 +1,23 @@
+.tictactoe {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 5px;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.board button {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+}
+
+.winner {
+  font-weight: bold;
+  margin-top: 1rem;
+}
