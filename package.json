@@ -6,10 +6,11 @@
   "scripts": {
     "postinstall": "playwright install --with-deps chromium",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
