@@ -1,7 +1,7 @@
-// src/games/RockPaperScissors/RPS.jsx
 import { useState, useContext } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import "./RPS.css";
+import { CHOICES, randomChoice, roundResultText } from "./utils";
 
 export default function RockPaperScissors() {
   const { playerName } = useContext(PlayerContext);
@@ -9,20 +9,12 @@ export default function RockPaperScissors() {
   const [playerChoice, setPlayerChoice] = useState("");
   const [computerChoice, setComputerChoice] = useState("");
 
-  const choices = ["Rock", "Paper", "Scissors"];
-
   const playRound = (choice) => {
     setPlayerChoice(choice);
-    const comp = choices[Math.floor(Math.random() * choices.length)];
+    const comp = randomChoice();
     setComputerChoice(comp);
 
-    if (choice === comp) setResult("It's a tie!");
-    else if (
-      (choice === "Rock" && comp === "Scissors") ||
-      (choice === "Paper" && comp === "Rock") ||
-      (choice === "Scissors" && comp === "Paper")
-    ) setResult(`${playerName || "You"} win!`);
-    else setResult("Computer wins!");
+    setResult(roundResultText(playerName, choice, comp));
   };
 
   const resetGame = () => {
@@ -37,7 +29,7 @@ export default function RockPaperScissors() {
       <p>Choose your move</p>
       {playerName && <p>Player: {playerName}</p>}
       <div className="choices">
-        {choices.map((c) => (
+        {CHOICES.map((c) => (
           <button key={c} onClick={() => playRound(c)}>{c}</button>
         ))}
       </div>
