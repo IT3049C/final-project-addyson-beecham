@@ -1,11 +1,10 @@
 # GameHub: Solo Final Project by Addyson Beecham
 
 ## Live Demo
-👉 [View Game Hub on GitHub Pages](https://it3049c.github.io/final-project-addyson-beecham/#/)
+[View Game Hub on GitHub Pages](https://it3049c.github.io/final-project-addyson-beecham/#/)
 
 ## Repository
-👉 [GitHub Repository](https://github.com/IT3049C/final-project-addyson-beecham)
-
+[GitHub Repository](https://github.com/IT3049C/final-project-addyson-beecham)
 
 ## Checklist
 
