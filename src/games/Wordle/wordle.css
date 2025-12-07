@@ -1,0 +1,80 @@
+:root {
+  --background: #0b1623;
+  --border: #3a3a3c;
+  --text-color: #f5f8ff;
+  --correct: #538d4e;
+  --misplaced: #b59f3b;
+  --incorrect: #3a3a3c;
+}
+
+.light-mode {
+  --background: #f5f8ff;
+  --border: #3a3a3c;
+  --text-color: #0b1623;
+  --correct: #00cc66;
+  --misplaced: #ffcc00;
+  --incorrect: #ff4d4d;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: var(--background);
+  color: var(--text-color);
+}
+
+header {
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  position: relative;
+}
+
+#mode-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.wordle-board {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.wordle-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.letter {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.correct {
+  background: var(--correct);
+}
+
+.misplaced {
+  background: var(--misplaced);
+}
+
+.incorrect {
+  background: var(--incorrect);
+}

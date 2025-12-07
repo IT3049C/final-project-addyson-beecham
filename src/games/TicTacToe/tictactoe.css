@@ -1,0 +1,70 @@
+﻿.tictactoe {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.mode-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.mode-menu button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 5px;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.board button {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.winner {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.controls button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.room-message {
+  color: #b05000;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}

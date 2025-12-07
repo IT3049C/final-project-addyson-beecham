@@ -1,0 +1,12 @@
+.rps {
+  text-align: center;
+  margin-top: 2rem;
+}
+.choices button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+.results {
+  margin-top: 1rem;
+  font-weight: bold;
+}
