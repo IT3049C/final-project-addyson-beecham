@@ -1,0 +1,17 @@
+.wordle {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.wordle form {
+  margin: 1rem 0;
+}
+
+.guesses {
+  margin-top: 1rem;
+}
+
+.result {
+  font-weight: bold;
+  margin-top: 1rem;
+}
