@@ -12,7 +12,6 @@ export const PlayerContext = createContext<PlayerContextType>({
 
 export function PlayerProvider({ children }: { children: ReactNode }) {
   const [playerName, setPlayerName] = useState<string>(() => {
-    // Optional: persist name across reloads
     return localStorage.getItem("playerName") || "";
   });
 
