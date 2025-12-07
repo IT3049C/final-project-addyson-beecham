@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import "./Hangman.css";
-import { getDisplayWord, isGameWon, isGameLost, resetGame } from "./utils";
+import { getDisplayWord, isGameWon, isGameLost, resetGame, getRandomWord } from "./utils";
 
 export default function Hangman() {
   const { playerName } = useContext(PlayerContext);
-  const [targetWord] = useState<string>("react"); // static for demo
+  const urlSeed = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('seed') : null;
+  const [targetWord, setTargetWord] = useState<string>(urlSeed || getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [wrongGuesses, setWrongGuesses] = useState<number>(0);
   const maxWrong = 6;
@@ -21,9 +22,10 @@ export default function Hangman() {
   };
 
   const handleReset = () => {
-    const { guessedLetters, wrongGuesses } = resetGame();
+    const { guessedLetters, wrongGuesses, targetWord: newWord } = resetGame();
     setGuessedLetters(guessedLetters);
     setWrongGuesses(wrongGuesses);
+    setTargetWord(urlSeed || newWord);
   };
 
   const displayWord = getDisplayWord(targetWord, guessedLetters);
