@@ -15,7 +15,6 @@ export default function CreateRoom() {
       const initialState = { board: resetBoard(), currentPlayer: "X" };
       const data = await api.createRoom(initialState);
       const roomId = data.roomId || data.id || (data.room && data.room.id);
-      // mark this client as player X for the room
       sessionStorage.setItem(`tictactoe-${roomId}`, "X");
       navigate(`/tictactoe/room/${roomId}`);
     } catch (err) {
